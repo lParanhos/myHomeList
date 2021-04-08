@@ -1,0 +1,12 @@
+{
+  "name": "myHomeList",
+  "displayName": "myHomeList",
+  "expo": {
+    "name": "myHomeList",
+    "slug": "myHomeList",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
