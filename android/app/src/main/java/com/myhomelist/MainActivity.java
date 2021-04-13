@@ -1,4 +1,4 @@
-package com.myhomelist;
+package com.paranhos.myhouselist;
 
 import android.os.Bundle;
 
