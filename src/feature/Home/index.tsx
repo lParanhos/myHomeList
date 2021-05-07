@@ -1,9 +1,10 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useCallback, useEffect, useState} from 'react';
 import {Alert, FlatList, RefreshControl} from 'react-native';
-import {FloatingActionButton, ListItem} from '../../components/index';
+import {FloatingActionButton} from '../../components/index';
 import {HouseItem} from '../../models/HouseItem';
 import {deleteItem, getItems, updateItem} from '../../services/api';
+import {FilterBar, ListItem} from './components';
 
 import {HomeContainer, HomeWrapper, HomeTitle} from './styles';
 
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
   const [items, setItems] = useState<HouseItem[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [showOnlyCompleted, setShowOnlyCompleted] = useState(false);
 
   const handleFetchData = useCallback(async () => {
     const result = await getItems();
@@ -60,15 +62,31 @@ const Home: React.FC = () => {
     ]);
   };
 
+  const getFilteredData = () => {
+    if (showOnlyCompleted) {
+      return items.filter(item => item.completed);
+    }
+
+    return items;
+  };
+
+  const handleToggleCompletedItems = () => {
+    setShowOnlyCompleted(!showOnlyCompleted);
+  };
+
   return (
     <HomeContainer>
       <HomeWrapper>
         <HomeTitle>Coisas da casa</HomeTitle>
+        <FilterBar
+          showOnlyCompleted={showOnlyCompleted}
+          toggleOnlyCompleted={handleToggleCompletedItems}
+        />
         <FlatList
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
-          data={items}
+          data={getFilteredData()}
           renderItem={({item}) => (
             <ListItem
               {...item}
