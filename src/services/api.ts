@@ -3,9 +3,12 @@ import 'firebase/database';
 import {HouseItem} from '../models/HouseItem';
 import {parseFirebaseObjetToHomeItem} from '../utils/parse';
 
-const db = firebaseApp.database().ref('/items');
+const dbRef = process.env.NODE_ENV === 'development' ? '/itemsDEV' : '/items';
+
+const db = firebaseApp.database().ref(dbRef);
 
 export const getItems = async (): Promise<HouseItem[]> => {
+  console.log(process.env);
   await firebaseApp.auth().signInAnonymously();
 
   const result = await db.once('value');
@@ -13,8 +16,14 @@ export const getItems = async (): Promise<HouseItem[]> => {
   return parsedValue;
 };
 
+/**
+ * Add new item in list
+ * @param {HouseItem} item -> The new item object
+ * @return {string||null} Id of this item
+ */
 export const setItem = async (item: HouseItem) => {
-  await db.push(item);
+  const result = await db.push(item);
+  return result.key;
 };
 
 interface UpdateProps {
