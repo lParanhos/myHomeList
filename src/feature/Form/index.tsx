@@ -4,17 +4,18 @@ import {AntDesign} from '@expo/vector-icons';
 import {inject, observer} from 'mobx-react';
 import {Alert} from 'react-native';
 
-import {Input} from '../../components';
-
 import {setItem} from '../../services/api';
 
 import Store from '../../store';
 
+import {Input} from '../../components';
+import {Button} from './components';
+
 import {
-  FormButton,
   FormCloseButton,
   FormContainer,
   FormWrapper,
+  ButtonsWrapper,
 } from './styles';
 interface Props {
   store?: typeof Store;
@@ -65,8 +66,10 @@ const Form = ({store}: Props) => {
           value={description}
           onChangeText={value => setDescription(value)}
         />
-        <FormButton title="Salvar" onPress={handleSubmit} />
-        <FormButton title="Cancelar" onPress={() => goBack()} color="orange" />
+        <ButtonsWrapper>
+          <Button text="Salvar" onPress={handleSubmit} />
+          <Button text="Cancelar" onPress={() => goBack()} color="orange" />
+        </ButtonsWrapper>
       </FormWrapper>
     </FormContainer>
   );

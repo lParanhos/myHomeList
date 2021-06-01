@@ -11,7 +11,3 @@ export const Container = styled.View`
 export const SearchInput = styled(Input)`
   width: 120px;
 `;
-
-export const Divider = styled.View`
-  width: 10px;
-`;

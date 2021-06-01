@@ -5,7 +5,8 @@ import HideButton from '../hideButton';
 
 import Store from '../../../../store';
 
-import {Container, SearchInput, Divider} from './styles';
+import {Container, SearchInput} from './styles';
+import {Divider} from '../../../../components';
 
 interface Props {
   store?: typeof Store;
@@ -19,7 +20,7 @@ const FilterBar: React.FC<Props> = ({store}: Props) => {
         showSearchIcon
         onChangeText={store?.updateText}
       />
-      <Divider />
+      <Divider width={10} height={0} />
       <HideButton
         onPress={store?.toggleOnlyCompleted!}
         completed={store?.showOnlyCompletedItems}
