@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import HideButton from '../hideButton';
 
 export const ListItemContainer = styled.View`
   border-radius: 10px;
@@ -42,6 +43,6 @@ export const ListItemDescription = styled.Text<TextProps>`
   ${({lineTrough}) => lineTrough && 'text-decoration: line-through;'}
 `;
 
-export const ListItemCheckButton = styled.TouchableOpacity`
+export const ListItemCheckButton = styled(HideButton)`
   padding-right: 5px;
 `;

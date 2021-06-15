@@ -1,8 +1,14 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {AntDesign} from '@expo/vector-icons';
+import {inject, observer} from 'mobx-react';
+import {Alert} from 'react-native';
 
 import {Input} from '../../components';
+
+import {setItem} from '../../services/api';
+
+import Store from '../../store';
 
 import {
   FormButton,
@@ -10,10 +16,11 @@ import {
   FormContainer,
   FormWrapper,
 } from './styles';
-import {setItem} from '../../services/api';
-import {Alert} from 'react-native';
+interface Props {
+  store?: typeof Store;
+}
 
-const Form = () => {
+const Form = ({store}: Props) => {
   const {goBack} = useNavigation();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -23,11 +30,18 @@ const Form = () => {
     setDescription('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (title.trim()) {
-      setItem({title, description, completed: false});
-      Alert.alert('Adicionado com sucesso!');
-      clearForm();
+      const newItem = {title, description, completed: false};
+      const itemID = await setItem(newItem);
+      if (itemID) {
+        store?.addNewItem({...newItem, id: itemID});
+        Alert.alert('Adicionado com sucesso!');
+        clearForm();
+        return;
+      }
+
+      Alert.alert('Erro ao adicionar');
       return;
     }
     Alert.alert('O título é um campo obrigatório');
@@ -58,4 +72,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default inject('store')(observer(Form));

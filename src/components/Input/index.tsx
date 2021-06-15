@@ -1,18 +1,29 @@
 import React from 'react';
-import {InputContainer, InputLabel, Input as CustomInput} from './styles';
+
+import {
+  InputContainer,
+  InputLabel,
+  InputWrapper,
+  SearchIcon,
+  Input as CustomInput,
+} from './styles';
 
 interface Props {
-  label: string;
+  label?: string;
   placeholder?: string;
   value?: string;
   onChangeText?: (text: string) => void;
+  showSearchIcon?: boolean;
 }
 
-const Input: React.FC<Props> = ({label, ...rest}) => {
+const Input: React.FC<Props> = ({label, showSearchIcon, ...rest}) => {
   return (
     <InputContainer>
-      <InputLabel>{label}</InputLabel>
-      <CustomInput {...rest} />
+      {label && <InputLabel>{label}</InputLabel>}
+      <InputWrapper>
+        {showSearchIcon && <SearchIcon />}
+        <CustomInput {...rest} />
+      </InputWrapper>
     </InputContainer>
   );
 };

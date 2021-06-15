@@ -1,7 +1,7 @@
 import React from 'react';
 import {Feather} from '@expo/vector-icons';
 
-import {HouseItem} from '../../models/HouseItem';
+import {HouseItem} from '../../../../models/HouseItem';
 
 import {
   ListItemContainer,
@@ -25,9 +25,6 @@ const ListItem: React.FC<Props> = ({
   onDelete,
   onCompletedChange,
 }) => {
-  const checkButtonIcon = completed ? 'check-circle' : 'circle';
-  const checkButtonColor = completed ? 'green' : 'gray';
-
   return (
     <ListItemContainer>
       <ListItemInfoWrapper>
@@ -40,13 +37,10 @@ const ListItem: React.FC<Props> = ({
       </ListItemInfoWrapper>
       <ListItemInfoWrapper flexDirection="row">
         {onCompletedChange && (
-          <ListItemCheckButton onPress={() => onCompletedChange(id!!)}>
-            <Feather
-              name={checkButtonIcon}
-              size={24}
-              color={checkButtonColor}
-            />
-          </ListItemCheckButton>
+          <ListItemCheckButton
+            completed={completed}
+            onPress={() => onCompletedChange(id!!)}
+          />
         )}
         {onDelete && (
           <TouchableOpacity onPress={() => onDelete(id!!)}>
