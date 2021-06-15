@@ -21,8 +21,9 @@ platform :android do
     gradle(task: "clean assembleRelease")
     firebase_app_distribution(
         app: ENV["APP_ID"],
+        firebase_cli_token: ENV["FIREBASE_TOKEN"],
         groups: ENV["FIREBASE_GROUPS"],
-        release_notes: "Lots of amazing new features to test out!"
+        release_notes: "Agora é possivel filtrar os item por status concluído ou pelo nome."
     ) 
   end
 end
