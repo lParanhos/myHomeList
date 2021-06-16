@@ -33,4 +33,7 @@ jobs:
           MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }},
           APP_ID: ${{ secrets.APP_ID }},
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }},
-        run: cd android && fastlane beta
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID}},
+          FIREBASE_GROUPS: ${{ secrets.FIREBASE_GROUPS}},
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN}},
+        run: cd android && fastlane beta --env

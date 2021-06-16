@@ -20,7 +20,7 @@ platform :android do
   lane :beta do
     gradle(task: "clean assembleRelease")
     firebase_app_distribution(
-        app: ENV["APP_ID"],
+        app: ENV["FIREBASE_APP_ID"],
         firebase_cli_token: ENV["FIREBASE_TOKEN"],
         groups: ENV["FIREBASE_GROUPS"],
         release_notes: "Agora é possivel filtrar os item por status concluído ou pelo nome."
