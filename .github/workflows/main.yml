@@ -25,7 +25,9 @@ jobs:
         run: ls -la && echo $FIREBASE_SECRET > android/app/google-services.json
       - name: Install packages
         run: yarn install
-      - name: Execute Fastlane command
+      - name: build release
+        run: cd android && ./gradlew assembleRelease
+      - name: Upload artifact to Firebase App Distribution
         env:
           API_KEY: ${{ secrets.API_KEY }},
           AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }},
@@ -38,4 +40,9 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID}},
           FIREBASE_GROUPS: ${{ secrets.FIREBASE_GROUPS}},
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN}},
-        run: cd android && bundle exec fastlane update_plugins && bundle exec fastlane beta --env
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: local
+          file: app/build/outputs/apk/release/app-release-unsigned.apk
