@@ -16,7 +16,7 @@ jobs:
         with:
           ruby-version: "2.x"
       - name: Install Fastlane
-        run: cd android && bundle install && cd ..
+        run: cd android && sudo gem uninstall fastlane-plugin-firebase_app_distribution && gem install fastlane-plugin-firebase_app_distribution --user-install && bundle install && cd ..
       - name: Decode google-services.json
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
