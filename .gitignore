@@ -137,5 +137,4 @@ docs/pages/versions/*/react-native/*.diff
 .env
 
 #firebase-config
-firebase-config.ts
 google-services.json
