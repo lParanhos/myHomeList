@@ -20,7 +20,7 @@ jobs:
       - name: Decode google-services.json
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
-        run: ls -la && echo $FIREBASE_SECRET > myHomeList/android/app/google-services.json
+        run: ls -la && echo $FIREBASE_SECRET > android/app/google-services.json
       - name: Install packages
         run: yarn install
       - name: Execute Fastlane command
