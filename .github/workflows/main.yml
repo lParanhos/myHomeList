@@ -38,4 +38,4 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID}},
           FIREBASE_GROUPS: ${{ secrets.FIREBASE_GROUPS}},
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN}},
-        run: cd android && sudo bundle exec fastlane beta --env
+        run: cd android && bundle exec fastlane update_plugins && bundle exec fastlane beta --env
