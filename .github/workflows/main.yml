@@ -33,4 +33,4 @@ jobs:
           MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID }},
           APP_ID: ${{ secrets.APP_ID }},
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID }},
-        run: cd android && bundle exec fastlane beta
+        run: cd android && bundle install && bundle exec fastlane beta
