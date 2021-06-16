@@ -15,7 +15,7 @@ jobs:
         run: |
           yarn global add firebase-tools
       - name: setup fastlane
-        run: bundle install
+        run: cd android && bundle install
       - name: Decode google-services.json
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
