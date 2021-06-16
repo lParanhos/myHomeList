@@ -16,11 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android beta
+### android distribute
 ```
-fastlane android beta
+fastlane android distribute
 ```
-Submit a new Beta Build to Crashlytics Beta
+Lane for distributing app using Firebase App Distributions
 
 ----
 
