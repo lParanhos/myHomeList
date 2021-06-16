@@ -36,4 +36,6 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID}},
           FIREBASE_GROUPS: ${{ secrets.FIREBASE_GROUPS}},
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN}},
-        run: cd android && fastlane beta --env
+        steps:
+          - run: curl -sL https://firebase.tools | bash
+          - run: cd android && fastlane beta --env
