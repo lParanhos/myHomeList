@@ -15,15 +15,13 @@ jobs:
         run: |
           yarn global add firebase-tools
       - name: setup fastlane
-        run: cd android && bundle install
+        run: cd android && bundle install && cd ..
       - name: Decode google-services.json
         env:
           FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
         run: echo $FIREBASE_SECRET > android/app/google-services.json
       - name: Install packages
         run: yarn install
-      - name: build release
-        run: cd android && ./gradlew assembleRelease
       - name: Upload artifact to Firebase App Distribution
         env:
           API_KEY: ${{ secrets.API_KEY }},
@@ -37,4 +35,4 @@ jobs:
           FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID}},
           FIREBASE_GROUPS: ${{ secrets.FIREBASE_GROUPS}},
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN}},
-        run: bundle exec fastlane android firebase_distribution
+        run: cd android && bundle exec fastlane android firebase_distribution
